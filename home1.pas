@@ -1,26 +1,6 @@
 PROGRAM Test1(INPUT, OUTPUT);
 VAR 
-  F:TEXT; 
-PROCEDURE RecursiveSort(VAR F:TEXT);
-VAR              
-  F1, F2:TEXT;
-  Ch:CHAR;
-BEGIN{RecursiveSort}
-  RESET(F);
-  IF NOT EOLN(F)
-  THEN
-    BEGIN
-      READ(F, Ch);
-      IF NOT EOLN(F)
-      THEN
-        BEGIN
-          Split(F, F1, F2);
-          RecursiveSort(F1);
-          RecursiveSort(F2);
-          Merge(F, F1, F2);
-        END
-    END
-END;{RecursiveSort}
+  F:TEXT;
 PROCEDURE Split(VAR F, F1, F2:TEXT);
 VAR
   Ch,Next: CHAR;
@@ -48,7 +28,7 @@ BEGIN {Split}
   WRITELN(F1);
   WRITELN(F2)
 END; {Split}
-PROCEDURE Merge(VAR F, F1, F2:TEXT)
+PROCEDURE Merge(VAR F, F1, F2:TEXT);
 VAR
   Ch, Ch1, Ch2:CHAR;
 BEGIN
@@ -57,7 +37,7 @@ BEGIN
   REWRITE(F);
   READ(F1, Ch1);
   READ(F2, Ch2);
-  WHILE (NOT EOLN(F1)) AND (NOT EOLN(F2)
+  WHILE (NOT EOLN(F1)) AND (NOT EOLN(F2))
   DO
     BEGIN
       IF Ch1 <= Ch2
@@ -85,10 +65,28 @@ BEGIN
     BEGIN
       READ(F2, Ch2);
       WRITE(F2, Ch)
-    END;   
+    END
+END;      
+PROCEDURE RecursiveSort(VAR F:TEXT);
+VAR              
+  F1, F2:TEXT;
+  Ch:CHAR;
+BEGIN{RecursiveSort}
+  RESET(F);
+  IF NOT EOLN(F)
+  THEN
+    BEGIN
+      READ(F, Ch);
+      IF NOT EOLN(F)
+      THEN
+        BEGIN
+          Split(F, F1, F2);
+          RecursiveSort(F1);
+          RecursiveSort(F2);
+          Merge(F, F1, F2)
+        END
+    END
+END;{RecursiveSort}
 BEGIN {Test1}
-  REWRITE(F);
-  WRITELN(F, '987654321');
-  RecursiveSort(F)
+  RecursiveSort(INPUT)
 END. {Test1}   
-

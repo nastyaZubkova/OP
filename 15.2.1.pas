@@ -32,9 +32,9 @@ BEGIN {RemoveExtraBlanks}
           HeadQ(Ch)
         END;
       {¬ставл€ем пробел между словами}
-     IF Ch <> LineEnd
+    { IF Ch <> LineEnd
      THEN
-       AddQ(Blank)
+       AddQ(Blank) }
     END;
   DelQ {уда€ем LineEnd из очереди}
 END; {RemoveExtraBlanks}

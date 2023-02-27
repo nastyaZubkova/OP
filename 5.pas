@@ -1,13 +1,13 @@
 PROGRAM Split1(INPUT,OUTPUT);
-  {ГЉГ®ГЇГЁГ°ГіГҐГІ INPUT Гў OUTPUT,Г±Г­Г Г·Г Г«Г  Г­ГҐГ·ГҐГІГ­Г»ГҐ,Г  Г§Г ГІГҐГ¬ Г·ГҐГІГ­Г»ГҐ
-   ГЅГ«ГҐГ¬ГҐГ­ГІГ»}
+  {Копирует INPUT в OUTPUT,сначала нечетные,а затем четные
+   элементы}
 VAR
   Ch,Next: CHAR;
   Odds,Evens: TEXT; 
 {PROCEDURE CopyOut(VAR F1: TEXT; VAR Ch: CHAR);}
 PROCEDURE CopyOut(VAR F1: TEXT; VAR Ch: CHAR);
 BEGIN
-  {ГЉГ®ГЇГЁГ°ГіГҐГ¬ F1 Гў OUTPUT}
+  {Копируем F1 в OUTPUT}
   WHILE NOT EOF(F1)
   DO
     BEGIN
@@ -25,10 +25,12 @@ BEGIN
   REWRITE(Evens);
   WRITE(Odds, '1234');
   WRITE(Evens, '5678');
-  {ГђГ Г§Г¤ГҐГ«ГїГҐГІ INPUT Гў Odds ГЁ Evens}
+  {Разделяет INPUT в Odds и Evens}
   RESET(Odds);
   RESET(Evens);
   CopyOut(Odds,Ch);
   CopyOut(Evens,Ch);
   WRITELN
 END.
+
+

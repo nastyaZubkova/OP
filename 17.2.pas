@@ -33,29 +33,28 @@ BEGIN {ReadNumber}
   D := 0;
   IF EOLN
   THEN
-    N := -1;
-  WHILE NOT EOLN AND (D <> -1) AND ((N DIV MAXINT/10) < 1)
+    D := -1;
+  WHILE NOT EOLN AND (D >= 0)  
   DO 
     BEGIN
       ReadDigit(F, D);
-      IF (D <> -1) AND ((N DIV MAXINT/10) < 1)
-      THEN
-        N := N*10 + D 
-      ELSE
-        IF N = 0 
-        THEN
-          N := -1;  
-      IF (N DIV MAXINT/10) >  1
-      THEN
-        BEGIN
-          N := -2;
-          D := -1
-        END     
+      WRITELN(N, ' ', D);
+      
+      IF (D >= 0)
+      THEN        
+        IF (MAXINT DIV 10 > N) OR ((MAXINT DIV 10 = N) AND (MAXINT MOD 10 >= D))
+        THEN       
+          N := N * 10 + D
+        ELSE
+          D := -2
     END;
-  
+  IF D < 0 
+  THEN
+    N := D
 END;{ReadNumber}
 
 BEGIN {Test}
+  WRITELN(MAXINT);  
   ReadNumber(INPUT, N);
   WRITELN(OUTPUT, N)
 END. {Test}
